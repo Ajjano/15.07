@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button{
+            width: 100px;
+            height: 30px;
+        }
+
+        #current_date{
+            font-size: 26px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div>
+    Task 1
+    <div id="timer"></div>
+</div>
+<br>
+<div class="timer_task2" id="task2_div">
+    Task 2
+    <p id="task2_p">500</p>
+    <button id="Start_Timer">Start Timer</button>
+    <button id="stop_Timer">Stop Timer</button>
+</div>
+<div>Task 3
+    <div id="current_date"></div>
+</div>
+
+<div class="timer_task2" id="task4_div">
+    Task 4
+    <p id="task4_p">500</p>
+    <p id="timer_off"></p>
+    <button id="start">Start Timer</button>
+</div>
+<script>
+    let i=0;
+    let div=document.getElementById('timer');
+    function timerFromZeroToInfinity() {
+        div.innerText=i++;
+    }
+    setInterval(()=>timerFromZeroToInfinity(),1000);
+
+    //2
+    let n=500;
+    let start=document.getElementById('Start_Timer');
+    let stop=document.getElementById('stop_Timer');
+    let task2_p=document.getElementById('task2_p');
+
+    let setinter;
+    start.onclick=function () {
+        setinter=setInterval(()=>{task2_p.innerText=n--;},1000);
+        start.disabled=true;
+    }
+    stop.onclick=function () {
+        if(setinter!=null) {
+            clearInterval(setinter);
+        }
+        start.disabled=false;
+    }
+
+    //3
+    let current_date=document.getElementById('current_date');
+    setInterval(()=>{
+        current_date.innerText=`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`;
+    },1000);
+
+    //4
+    let start2=document.getElementById('start');
+    let p_task4=document.getElementById('task4_p');
+    let timer_off=document.getElementById('timer_off');
+
+    start2.onclick=function () {
+        let intervalStart=setInterval(()=>{
+            p_task4.innerText=n--;
+            start2.disabled=true;
+            if(n==0){
+                timer_off.innerText="Счет завершен";
+                clearInterval(intervalStart);
+                start2.disabled=false;
+            }
+        },1000);
+    }
+</script>
+</body>
+</html>
