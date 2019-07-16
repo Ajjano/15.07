@@ -26,7 +26,7 @@
             clear: both;
         }
 
-        .button_div{
+        .button_div, .task7{
             display: flex;
             align-items: center;
             justify-content: center
@@ -61,14 +61,31 @@
 </div>
 
 <div class="timer_task5" id="task5_div">
-    Task 4
+    Task 5-6
     <div class="slider">
         <img src="cat.png" alt="">
         <img src="cow.png" alt="">
         <img src="pig.png" alt="">
     </div>
     <div class="clear"></div>
-   <div class="button_div"> <input type="button" id="start_slider" value="Start slider"></div>
+   <div class="button_div"> <input type="button" id="start_slider" value="Start slider">
+       <input type="button" id="stop_slider" value="Stop slider" disabled="true">
+   </div>
+</div>
+
+<div class="task7">
+    <table class="table_task7">
+        <tr>
+            <th>Hours</th>
+            <th>Minutes</th>
+            <th>Seconds</th>
+        </tr>
+        <tr>
+            <td id="hours">fbf</td>
+            <td id="mins">bfb</td>
+            <td id="secs">bfb</td>
+        </tr>
+    </table>
 </div>
 <script>
     let i=0;
@@ -122,13 +139,33 @@
     //5
     let images=document.images;
     let click=document.querySelector('#start_slider');
+    let stop_click=document.querySelector('#stop_slider');
+    let interval;
     click.onclick=function () {
-        setInterval(()=>{
-        let temp=images[0].src;
-            images[0].src=images[1].src;
-            images[1].src=images[2].src;
-            images[2].src=temp;
-    }, 1000)};
+        interval = setInterval(() => {
+            let temp = images[0].src;
+            images[0].src = images[1].src;
+            images[1].src = images[2].src;
+            images[2].src = temp;
+        }, 1000);
+        stop_click.disabled = false;
+        click.disabled = true;
+    }
+
+    stop_click.onclick=function () {
+        clearInterval(interval);
+        stop_click.disabled = true;
+        click.disabled = false;
+    }
+
+    //7
+    let currentDate=new Date().getTime();
+    let middleNigth=new Date();
+    middleNigth.setHours(0,0,0,0);
+    middleNigth=middleNigth.getTime();
+    let timeSpan=middleNigth+(24*3600)-currentDate;
+
+
 </script>
 </body>
 </html>
