@@ -13,6 +13,28 @@
             font-size: 26px;
             font-weight: bold;
         }
+
+        .slider{
+            display: flex;
+            justify-content: space-between;
+        }
+        .slider>img{
+            width: 20%;
+            height: auto;
+        }
+        .clear{
+            clear: both;
+        }
+
+        .button_div{
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        #start_slider{
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +58,17 @@
     <p id="task4_p">500</p>
     <p id="timer_off"></p>
     <button id="start">Start Timer</button>
+</div>
+
+<div class="timer_task5" id="task5_div">
+    Task 4
+    <div class="slider">
+        <img src="cat.png" alt="">
+        <img src="cow.png" alt="">
+        <img src="pig.png" alt="">
+    </div>
+    <div class="clear"></div>
+   <div class="button_div"> <input type="button" id="start_slider" value="Start slider"></div>
 </div>
 <script>
     let i=0;
@@ -85,6 +118,17 @@
             }
         },1000);
     }
+
+    //5
+    let images=document.images;
+    let click=document.querySelector('#start_slider');
+    click.onclick=function () {
+        setInterval(()=>{
+        let temp=images[0].src;
+            images[0].src=images[1].src;
+            images[1].src=images[2].src;
+            images[2].src=temp;
+    }, 1000)};
 </script>
 </body>
 </html>
