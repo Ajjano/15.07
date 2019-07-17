@@ -159,11 +159,22 @@
     }
 
     //7
-    let currentDate=new Date().getTime();
-    let middleNigth=new Date();
-    middleNigth.setHours(0,0,0,0);
-    middleNigth=middleNigth.getTime();
-    let timeSpan=middleNigth+(24*3600)-currentDate;
+    let middleNigth=new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()+1, 0,0,0);
+
+
+    let hours=document.querySelector('#hours');
+    let mins=document.querySelector('#mins');
+    let secs=document.querySelector('#secs');
+
+    setInterval(()=>{
+        let currentDate=Date.now();
+        let timeSpan=middleNigth.getTime()-currentDate;
+        hours.innerText=`${Math.floor(timeSpan/(1000*60*60))}`;
+        timeSpan-=parseInt(hours.innerText)*(1000*60*60);
+        mins.innerText=`${Math.floor(timeSpan/(1000*60))}`;
+        timeSpan-=parseInt(mins.innerText)*(1000*60);
+        secs.innerText=`${Math.floor(timeSpan/(1000))}`;
+    }, 1000);
 
 
 </script>
